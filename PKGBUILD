@@ -20,6 +20,7 @@ license=(
   AGPL3
 )
 depends=(
+ "${_py}"
  "${_py}-appdirs"
  "${_py}-keyboard"
  "${_py}-gnupg"
@@ -27,6 +28,12 @@ depends=(
 )
 makedepends=(
  "${_py}-setuptools"
+)
+provides=(
+  "${_py}-${_pkgname}=${pkgver}"
+)
+conflicts=(
+  "${_py}-${_pkgname}"
 )
 sha256sums=()
 source=()
@@ -53,7 +60,7 @@ package() {
   cd \
     "${_pkgname}-${pkgver}"
   "${_py}" \
-    setup.py \
+    'setup.py' \
       install \
         --root="${pkgdir}" \
 	--optimize=1
